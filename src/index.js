@@ -1,26 +1,26 @@
 const express = require('express');
-const typeorm = require('typeorm'); 
-const Student = require('./models/Student'); 
+const studentsControllers = require('./controllers/students');
+const { getDatabase } = require("./database/utils");
+const { initializeStudents } = require('./models/Student/manager');
 
-const app = express()
-
-const dataSource = new typeorm.DataSource({
-  type:"sqlite",
-  database:"./db_bagz.sqlite", 
-  synchronize: true, 
-  entities: [Student],
-})
+const app = express();
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('Youhou');
 });
 
+const STUDENTS_PATH = '/api/students'; 
+app.get(STUDENTS_PATH, studentsControllers.get); 
+app.post(STUDENTS_PATH, studentsControllers.post); 
+app.put(`${STUDENTS_PATH}/:id`, studentsControllers.put); 
+app.delete(`${STUDENTS_PATH}/:id`, studentsControllers.del); 
+
 const PORT = 4000; 
 
 const start = async () => {
-  await dataSource.initialize(); 
-  await dataSource.getRepository(Student).clear();
-  dataSource.getRepository(Student).save({ name: 'First Student' });
+  await initializeStudents();
+  await getDatabase();
   app.listen(PORT, () => console.log(`Server started on ${4000} 😎`));
 }; 
 
