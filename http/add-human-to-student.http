@@ -1,0 +1,6 @@
+POST http://localhost:4000/api/students/458624fb-ca9d-44e8-a72f-b27d9dbb2389/humans
+Content-Type: application/json
+
+{
+    "humanId": "02ceaa47-a429-4816-b676-6b025d72bb25"
+}

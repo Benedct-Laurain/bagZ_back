@@ -1,9 +1,12 @@
-const { getStudentRepository } = require("../../database/utils");
+const { getStudentRepository, getHumanRepository } = require("../../database/utils");
+const { getSchoolByName } = require('../School/manager')
 
 async function initializeStudents() {
     const studentRepository = await getStudentRepository(); 
     await studentRepository.clear();
-    await studentRepository.save({ firstName: 'First', lastName: 'Student'});
+    const lyonSchool = await getSchoolByName('Lyon'); 
+    await studentRepository.save({ firstName: 'First', lastName: 'Student', school: lyonSchool, });
+    await studentRepository.save({ firstName: 'Second', lastName: 'Student', school: lyonSchool, });
 }
 
 async function getStudents() {
@@ -45,10 +48,26 @@ async function deleteStudent(id) {
     return studentRepository.delete(student);
 }
 
+const addHumanToStudent = async (studentId, humanId) => {
+    const studentRepository = await getStudentRepository(); 
+    const humanRepository = await getHumanRepository(); 
+    const student = await studentRepository.findOneBy({ id: studentId }); 
+    if (!student) {
+        throw Error('No existing Student matching ID.');
+    }
+    const human = await humanRepository.findOneBy({ id: humanId }); 
+    if (!human) {
+        throw Error('No existing Human matching ID.');
+    }
+    student.humans = [...student.humans, human]; 
+    return studentRepository.save(student); 
+}
+
 module.exports = {
     initializeStudents, 
     getStudents,
     createStudent,
     updateStudent, 
     deleteStudent,
+    addHumanToStudent, 
 }

@@ -1,11 +1,13 @@
 const typeorm = require('typeorm');
 const Student = require('../models/Student');
+const School = require('../models/School');
+const Human = require('../models/Human');
 
 const dataSource = new typeorm.DataSource({
   type: "sqlite",
   database: "./db_bagz.sqlite",
   synchronize: true,
-  entities: [Student],
+  entities: [Student, School, Human],
   logging: ["query", "error"],
 });
 
@@ -23,7 +25,16 @@ async function getStudentRepository() {
   return (await getDatabase()).getRepository(Student);
 }
 
+async function getSchoolRepository() {
+  return (await getDatabase()).getRepository(School);
+}
+
+const getHumanRepository = async () =>
+  (await getDatabase()).getRepository(Human);
+
 module.exports = {
   getDatabase,
   getStudentRepository,
-}
+  getSchoolRepository, 
+  getHumanRepository,
+};

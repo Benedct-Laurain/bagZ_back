@@ -1,7 +1,7 @@
 const EntitySchema = require('typeorm').EntitySchema; 
 
 module.exports = new EntitySchema({
-    name: 'Student', 
+    name: 'Human', 
     columns: {
         id:{
             primary: true, 
@@ -15,18 +15,4 @@ module.exports = new EntitySchema({
             type:'text',
         }
     },
-    relations: {
-        school: {
-            target: 'School', 
-            type: 'many-to-one',
-            eager: true, 
-        }, 
-        humans: {
-            target: 'Human', 
-            type: 'many-to-many', 
-            joinTable : true, 
-            eager: true, 
-        }
-    }
 });
-

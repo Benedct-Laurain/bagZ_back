@@ -1,4 +1,4 @@
-const { getStudents, createStudent, updateStudent, deleteStudent } = require('../models/Student/manager')
+const { getStudents, createStudent, updateStudent, deleteStudent, addHumanToStudent } = require('../models/Student/manager')
 
 const get = async (req, res) => {
     const students = await getStudents(); 
@@ -42,9 +42,26 @@ const del = async (req, res) => {
     }  
 };
 
+const addHuman = async (req, res) => {
+    const { id: studentId } = req.params; 
+    const { humanId } = req.body; 
+
+    if (!humanId) {
+        res.statut(400).json({ error: 'Skill ID is mandatory' }); 
+    } else {
+        try {
+            const updateStudent = await addHumanToStudent(studentId, humanId); 
+            res.json(updateStudent); 
+        } catch (error) {
+            res.status(404).json({ error: error.message }); 
+        }
+    }
+}
+
 module.exports = {
     get,
     post, 
     put, 
-    del
+    del, 
+    addHuman, 
 }
