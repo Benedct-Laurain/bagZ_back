@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledBurger = styled.div`
@@ -68,8 +69,10 @@ const Burger = () => {
 
       <Nav open={open}>
           <ul>
-            <li>Milk</li>
-            <li>Cheese</li>
+            <li>A propos</li>
+            <NavLink to="/student">Je suis étudiant</NavLink>
+            <NavLink to="/volunteer">Je suis bénévole</NavLink>
+            <NavLink to="/partners">Je suis partenaire</NavLink>
           </ul>
       </Nav>
     </>
