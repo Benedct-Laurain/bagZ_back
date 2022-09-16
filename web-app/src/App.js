@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 
 import Header from './components/Header';
 import Home from './screens/Home';
+import Infos from './screens/Infos';
 import Partners from './screens/Partners';
 import Student from './screens/Student';
 import Volunteer from './screens/Volunteer';
@@ -14,6 +15,7 @@ function App() {
       <Header/>
       <Routes>
         <Route path='/' element={<Home/>} />
+        <Route path='/infos' element={<Infos />} />
         <Route path='/student' element={<Student/>} />
         <Route path='/volunteer' element={<Volunteer/>} />
         <Route path='/partners' element={<Partners />} />

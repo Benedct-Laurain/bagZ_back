@@ -31,10 +31,9 @@ export const BurgerNav = styled.div`
   }
 `;
 
-export const Nav = styled.ul`
-  list-style: none;
+export const Nav = styled.div`
   display: flex;
-  flex-flow: column nowrap;
+  flex-direction: column;
   background-color: rgba(13, 37, 56, 0.7);
   // box-shadow: 1px 1px 10px #FFF;
   position: fixed;
@@ -44,7 +43,7 @@ export const Nav = styled.ul`
   margin: 0;
   height: 100vh;
   width: 200px;
-  padding: 0 20px 20px 20px;
+  padding: 80px 10px 80px 10px;
   z-index: 10;
   // padding-top: 3.5rem;
   transition: transform 0.3s ease-in-out;

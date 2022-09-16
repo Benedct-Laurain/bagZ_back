@@ -9,6 +9,9 @@ export const PageTitleLink = styled(Link)`
 export const BurgerLink = styled(NavLink)`
   color: inherit; 
   text-decoration: none; 
+  display: flex; 
+  align-items: center; 
+  padding-bottom: 10px;
   &:hover {
     color: #946d46; 
   };
